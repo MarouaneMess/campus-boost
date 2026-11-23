@@ -160,6 +160,27 @@ export function ImpactSimulator({
           <span>Reste théorique de cette simulation</span>
           <strong>{formatEuro(result.remainder)}</strong>
         </div>
+        <div
+          className="budget-visual"
+          aria-label={`Répartition illustrative : ${formatEuro(amount - result.remainder)} d’équipements et ${formatEuro(result.remainder)} restants`}
+        >
+          <div className="budget-bar" aria-hidden="true">
+            <span
+              style={{
+                width: `${amount > 0 ? ((amount - result.remainder) / amount) * 100 : 0}%`,
+              }}
+            />
+          </div>
+          <div>
+            <span>
+              Équivalents matériels{" "}
+              <strong>{formatEuro(amount - result.remainder)}</strong>
+            </span>
+            <span>
+              Reste théorique <strong>{formatEuro(result.remainder)}</strong>
+            </span>
+          </div>
+        </div>
         <p className="small muted">
           Chaque équipement constitue une alternative indépendante. Les
           quantités ne s’additionnent pas.

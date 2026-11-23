@@ -1,10 +1,23 @@
-# Campus Boost
+# Campus Boost · V2
 
 **Investissez dans les talents de demain.**
 
 Application Next.js de présentation du projet de sept étudiants de l’UFR Mathématiques et Informatique de l’Université Paris Cité. MATCH met en relation huit secteurs et des compétences documentées ; le simulateur illustre des budgets pédagogiques ; `/demo` propose un parcours guidé en sept étapes.
 
-**Projet développé localement. Aucun déploiement, enregistrement de site distant ou envoi de source n’a été effectué.**
+La V1 est publiée par l’équipe sur [campus-boost.vercel.app](https://campus-boost.vercel.app/). **Cette V2 est préparée localement : aucun déploiement ni envoi sur GitHub n’est effectué par les commandes de développement.** La publication reste à votre initiative.
+
+## Nouveautés V2
+
+- Identité préservée : Hero, palette marine/fuchsia, animations et contenu V1. Logo officiel d’Université Paris Cité et cartouche « UFR Mathématiques et Informatique » dans l’en-tête et le pied de page.
+- Présentation interactive de la communauté : étudiants, équipes pédagogiques, alumni et entreprises.
+- Réalisations étudiantes filtrables dans six domaines, fiche détaillée accessible au clavier, médias, source et liens publics. CampusBoost est la première réalisation documentée ; les huit scénarios hypothétiques restent dans une section distincte.
+- Témoignages filtrés par catégorie, avec prise en charge du parcours, de la formation, de LinkedIn, des vidéos et sous-titres. Les trois emplacements de démonstration sont conservés.
+- Sept pistes d’événements et cinq familles de compétitions. Statuts explicites, références officielles et espaces pour les résultats et partenaires documentés.
+- Deux chronologies : huit étapes de travail CampusBoost et quatre repères SOLTéA 2027, dont les dates restent « À confirmer ».
+- Six besoins pédagogiques détaillés, reliés aux formations et aux scénarios. Le simulateur affiche une barre d’équivalence et conserve ses limites.
+- MATCH relie les compétences sélectionnées aux réalisations et besoins pédagogiques par intersection de compétences expliquée.
+- Kit ambassadeur : cinq modèles copiables et téléchargeables, lien partageable, [brochure PDF](public/documents/campusboost-brochure.pdf) de deux pages et version HTML accessible sur `/kit-ambassadeur/brochure`.
+- Menu « Explorer », navigation mobile complète et progression de lecture. Nouveaux contenus et sources maintenus dans des fichiers dédiés, sans dépendance supplémentaire.
 
 ## Installation et lancement
 
@@ -48,12 +61,15 @@ src/
     ...                    Sections éditoriales, composants UI et animations
   data/                    Secteurs, formations, compétences, projets, configuration
   lib/                     Calculs purs : matching et simulation
-  styles/globals.css       Design system, styles responsive et accessibilité
+  styles/globals.css       Design system V1, styles responsive et accessibilité
+  styles/v2.css            Extensions V2 et mise en page de la brochure
   types/content.ts         Types stricts des contenus
 public/
   brand/                   Logo fourni, variantes optimisées, favicon, palette
   images/                  Affiche vectorielle de la future vidéo
   videos/                  Emplacement des futurs fichiers MP4 et VTT
+  projects/                Captures réelles des réalisations documentées
+  documents/               Brochure PDF téléchargeable
   sw.js                    Cache local limité à la démonstration
 logo/CampusBoost_logo.png   Original fourni, conservé intact
 scripts/prepare-brand.mjs   Reproduction des variantes du logo
@@ -69,6 +85,7 @@ Stack : Next.js App Router, React, TypeScript strict, Tailwind CSS 4, Motion, Th
 3. Chaque besoin renvoie à des identifiants de compétences documentés dans `src/data/skills.ts`.
 4. `src/lib/matching.ts` retient les formations ayant au moins une compétence commune. Il trie par nombre de domaines communs, puis par identifiant pour les ex æquo.
 5. L’interface affiche les domaines concernés, les fiches officielles et une idée de projet pédagogique du secteur.
+6. Elle propose les réalisations documentées et les besoins pédagogiques qui partagent au moins une compétence choisie, avec les compétences communes affichées. Aucune relation commerciale n’est inférée.
 
 Il s’agit d’une **mise en relation éditoriale explicable**, sans score prédictif ou API d’IA. Aucun besoin n’est attribué à une entreprise réelle. Une sélection vide affiche une explication et permet de reprendre la sélection. Les cinq maillons entreprise → besoins → compétences → formations → projets restent lisibles en HTML, indépendamment de WebGL.
 
@@ -112,6 +129,35 @@ Toutes les idées d’investissement et de projets sont signalées « Propositio
 
 Ne pas modifier uniquement une fiche visible : garder cohérents les domaines de compétences, les sources et les statuts. Les tests métier vérifient notamment la cohérence des identifiants.
 
+### Contenus V2 à compléter
+
+| Contenu                     | Fichier                    | Règle de publication                                                                                                                                           |
+| --------------------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Communauté et liens UFR     | `src/data/ufr.ts`          | Rôles synthétiques et liens officiels, sans chiffre inventé.                                                                                                   |
+| Réalisations étudiantes     | `src/data/realizations.ts` | `status: documented`, preuve publique, formation, résultat réel et capture. Les projets `draft` ne sont pas affichés.                                          |
+| Salons et événements        | `src/data/events.ts`       | `confirmed` exige `confirmationSource`. Sans preuve, le statut reste envisagé ; passé est déterminé à partir de la dernière date, dans le calendrier français. |
+| Compétitions et partenaires | `src/data/competitions.ts` | Ajouter des résultats sourcés. Un partenaire n’est affiché qu’avec une source de participation et une date d’autorisation du logo.                             |
+| Feuille de route            | `src/data/roadmap.ts`      | Planning CampusBoost prévisionnel ; dates SOLTéA 2027 à confirmer, sans réutilisation des dates 2026.                                                          |
+| Kit ambassadeur             | `src/data/ambassador.ts`   | Modèles à personnaliser, URL publique et explications. Aucun envoi automatique ni collecte de coordonnées.                                                     |
+
+Une réalisation peut recevoir plusieurs domaines, des compétences, des formations associées, plusieurs images avec texte alternatif, une vidéo locale, des sous-titres, un dépôt et une démonstration. Les participants nommés exigent une `consentDate`. L’équipe ne doit ajouter que des médias dont elle peut autoriser la diffusion.
+
+La Nuit de l’Info (3–4 décembre 2026) et Viva Technology (16–19 juin 2027) ont une date d’organisateur documentée, **sans participation CampusBoost confirmée**. Les cinq autres rendez-vous sont des idées ajoutées à la demande de l’équipe. Les références se trouvent dans `/sources`.
+
+Le calendrier d’habilitation des établissements 2027 publié par SOLTéA est distinct des dates d’affectation des employeurs. La vérification du 18 novembre 2026 n’a pas identifié ces dernières : elles restent explicitement « À confirmer ».
+
+Pour enrichir la V2, fournir les projets et leurs preuves, les témoignages autorisés, les dates d’événements avec une confirmation de participation, les résultats de compétition et les éventuelles autorisations de logos. Les besoins détaillés sont des hypothèses d’usage ; faire valider leur réalité et leur priorité par l’UFR.
+
+### Régénérer les supports
+
+La brochure PDF et l’aperçu social sont déjà présents dans `public/`. Leur génération n’est pas requise lors du déploiement Vercel. Pour les actualiser après un changement de contenu, lancer le site local dans un premier terminal, puis dans un second :
+
+```powershell
+npm run prepare:documents
+```
+
+Le script utilise Playwright et Microsoft Edge sous Windows, déjà utilisés par les tests. Il lit `/kit-ambassadeur/brochure` sur `http://127.0.0.1:3000` et produit le PDF avec balisage ainsi que l’aperçu social. `CAMPUS_PREVIEW_URL` permet de choisir un autre port **local**. La version HTML reste disponible pour la lecture accessible. Aucune publication n’est déclenchée.
+
 ### Témoignages
 
 Les trois cartes actuelles sont des **emplacements de démonstration**, sans personne inventée ni fausse citation. Pour publier un témoignage autorisé, renseigner `name`, `quote`, `consentDate` et passer `status` à `approved`. Ajouter éventuellement `photo` ou `video` avec un chemin local. Le composant n’affiche une citation réelle que si l’accord et les champs indispensables sont présents.
@@ -124,7 +170,9 @@ Déposer un MP4 autorisé et des sous-titres WebVTT dans `public/videos/`. Rense
 
 Le fichier original se trouve dans `logo/CampusBoost_logo.png` et reste inchangé. L’analyse des pixels opaques confirme surtout du **bleu marine et du fuchsia**, et non les couleurs supposées dans le brief. La palette dominante et les bornes de la marge transparente sont enregistrées dans `public/brand/palette.json`.
 
-Le script `npm run prepare:brand` retire uniquement la marge transparente, conserve le dessin et ses proportions, et génère un WebP sans perte et des icônes PNG. Le logo est réutilisé dans la navigation, le footer et le favicon ; aucun logo universitaire n’a été inventé. Le nom de l’université est simplement composé en texte.
+Le script `npm run prepare:brand` retire uniquement la marge transparente, conserve le dessin et ses proportions, et génère un WebP sans perte et des icônes PNG. Le logo est réutilisé dans la navigation, le footer et le favicon.
+
+La V2 utilise le [PNG officiel de l’université](https://u-paris.fr/wp-content/uploads/2022/03/UniversiteParisCite_logo_horizontal_couleur_RVB.png), proposé sur sa [page de charte graphique](https://u-paris.fr/charte-graphique-et-outils/), consultée le 18 novembre 2026. Le fichier est conservé dans `public/brand/universite-paris-cite.png`, sans modification du dessin ni de ses couleurs. Le cartouche UFR reste un élément HTML séparé. L’usage des identités et des supports doit être validé pour une communication institutionnelle.
 
 Tokens principaux dans `src/styles/globals.css` : marine `#0b2146`, fuchsia `#b60055`, papier `#faf9f6`. Les styles spécifiques complètent les utilitaires Tailwind pour conserver une mise en page cohérente.
 
@@ -154,6 +202,8 @@ Le cache ne contient aucun montant saisi ni profil d’entreprise. Il peut être
 
 ## Vérifications
 
+V2 vérifiée localement le 18 novembre 2026 : compilation de production, lint et TypeScript réussis ; **6 tests métier et 12 tests navigateur réussis**. La brochure contient deux pages. La perte de contexte WebGL, y compris avant la fin de l’initialisation de Three.js, bascule vers l’illustration statique.
+
 ```powershell
 npm run lint
 npm run typecheck
@@ -168,6 +218,7 @@ npm run test:e2e
 - Playwright vérifie les huit secteurs, les filtres, les simulations, le parcours guidé hors ligne après rechargement, le menu au clavier, les largeurs 320/390/768/1440 px et l’alternative sans WebGL.
 - Un test WebGL vérifie le rendu, la pause/reprise, la perte de contexte et l’absence d’appels externes ou d’avertissements de rendu.
 - Axe vérifie les règles WCAG A/AA sur les vues testées. Cela ne constitue pas une certification globale d’accessibilité.
+- Les contrôles V2 couvrent les relations entre données, les statuts d’événements, la fiche projet et son retour de focus, les filtres, les liens contextuels de MATCH, la copie dans le presse-papiers, les téléchargements texte/PDF et le menu sur les tailles intermédiaires.
 
 Sous Windows, les tests utilisent Microsoft Edge installé. Sur une machine sans navigateur compatible, lancer `npx playwright install chromium` puis adapter `channel` dans `playwright.config.ts` (retirer `msedge`). Le serveur de production est démarré et arrêté automatiquement par Playwright si aucun serveur n’est déjà disponible au port 3000. Les captures locales se trouvent dans `.local/` et les rapports d’échec dans `test-results/`, tous deux ignorés par Git.
 

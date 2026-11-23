@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/data/site";
+import { Brand } from "./brand";
 
 export function Footer() {
   return (
@@ -9,12 +9,7 @@ export function Footer() {
       <div className="container">
         <div className="footer-main">
           <div className="footer-brand">
-            <Image
-              src="/brand/campus-boost.webp"
-              width={140}
-              height={94}
-              alt="Campus Boost"
-            />
+            <Brand />
             <p>
               Une initiative étudiante.
               <br />
@@ -27,6 +22,8 @@ export function Footer() {
             <Link href="/#formations">Les formations</Link>
             <Link href="/#impact">Votre impact</Link>
             <Link href="/demo">La démonstration</Link>
+            <Link href="/#realisations">Les réalisations étudiantes</Link>
+            <Link href="/#ambassadeurs">Le kit ambassadeur</Link>
           </div>
           <div>
             <p className="footer-label">ALLER PLUS LOIN</p>
@@ -49,6 +46,8 @@ export function Footer() {
             </a>
             <Link href="/sources">Sources & transparence</Link>
             <Link href="/mentions-legales">Informations sur le site</Link>
+            <Link href="/#calendrier">La feuille de route</Link>
+            <Link href="/#terrain">CampusBoost sur le terrain</Link>
           </div>
           <div className="footer-statement">
             <span>Le futur se construit</span>

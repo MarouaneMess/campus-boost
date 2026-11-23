@@ -1,6 +1,6 @@
 {
   "name": "campus-boost",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "description": "Campus Boost — les entreprises et les talents de demain.",
@@ -13,6 +13,7 @@
     "test": "node --experimental-strip-types --test tests/domain.test.ts",
     "test:e2e": "playwright test",
     "prepare:brand": "node scripts/prepare-brand.mjs",
+    "prepare:documents": "node scripts/prepare-documents.mjs",
     "format": "prettier --write src tests scripts public/sw.js *.ts *.mjs *.json README.md"
   },
   "engines": {

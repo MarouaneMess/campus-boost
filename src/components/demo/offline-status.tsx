@@ -34,6 +34,7 @@ export function OfflineStatus() {
         const resources = new Set([
           "/demo",
           "/brand/campus-boost.webp",
+          "/brand/universite-paris-cite.png",
           "/brand/icon.png",
           "/brand/favicon.png",
         ]);

@@ -1,6 +1,6 @@
 "use client";
 
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { Line } from "@react-three/drei";
 import { useEffect, useMemo, useRef } from "react";
 import {
@@ -240,28 +240,15 @@ function Constellation({
   );
 }
 
-function ContextHealth({ onError }: { onError: () => void }) {
-  const gl = useThree((state) => state.gl);
-  useEffect(() => {
-    const canvas = gl.domElement;
-    canvas.addEventListener("webglcontextlost", onError);
-    // Le démontage volontaire de la scène libère le contexte : ce n’est pas une panne.
-    return () => canvas.removeEventListener("webglcontextlost", onError);
-  }, [gl, onError]);
-  return null;
-}
-
 export default function NetworkScene({
   dark = false,
   selection = 0,
   active = true,
-  onError,
   onReady,
 }: {
   dark?: boolean;
   selection?: number;
   active?: boolean;
-  onError: () => void;
   onReady: () => void;
 }) {
   return (
@@ -271,7 +258,6 @@ export default function NetworkScene({
       gl={{ alpha: true, antialias: true, powerPreference: "low-power" }}
       onCreated={onReady}
     >
-      <ContextHealth onError={onError} />
       <ambientLight intensity={1.8} />
       <directionalLight position={[3, 5, 5]} intensity={3.5} color="#ffffff" />
       <directionalLight position={[-4, -2, 2]} intensity={2} color="#efbdd5" />

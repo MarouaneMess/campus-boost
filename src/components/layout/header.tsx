@@ -1,22 +1,78 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X, ArrowUpRight, Play } from "lucide-react";
+import { Brand } from "./brand";
 
 const links = [
-  { href: "/#projet", label: "Le projet" },
-  { href: "/#match", label: "Campus Boost MATCH" },
+  { href: "/#ufr", label: "Notre UFR" },
+  { href: "/#match", label: "MATCH" },
+  { href: "/#realisations", label: "Réalisations" },
   { href: "/#impact", label: "Votre impact" },
-  { href: "/#formations", label: "Les formations" },
+];
+const moreLinks = [
+  { href: "/#projet", label: "Le projet CampusBoost" },
+  { href: "/#formations", label: "Les 9 formations" },
+  { href: "/#projets", label: "Les idées pédagogiques" },
+  { href: "/#temoignages", label: "Les parcours" },
+  { href: "/#terrain", label: "Salons & rencontres" },
+  { href: "/#competitions", label: "Les compétitions" },
+  { href: "/#calendrier", label: "La feuille de route" },
+  { href: "/#ambassadeurs", label: "Le kit ambassadeur" },
 ];
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
+  const desktopMenu = useRef<HTMLDetailsElement>(null);
+  const progress = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const total = document.documentElement.scrollHeight - innerHeight;
+      if (progress.current)
+        progress.current.style.transform = `scaleX(${total > 0 ? Math.min(1, Math.max(0, scrollY / total)) : 0})`;
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    const observer = new ResizeObserver(schedule);
+    observer.observe(document.body);
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    schedule();
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, [pathname]);
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && desktopMenu.current?.open) {
+        desktopMenu.current.open = false;
+        desktopMenu.current.querySelector("summary")?.focus();
+      }
+    };
+    const outside = (event: PointerEvent) => {
+      if (
+        desktopMenu.current &&
+        !desktopMenu.current.contains(event.target as Node)
+      )
+        desktopMenu.current.open = false;
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", outside);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", outside);
+    };
+  }, []);
   useEffect(() => {
     if (!open) return;
     const onKey = (event: KeyboardEvent) => {
@@ -32,32 +88,32 @@ export function Header() {
   return (
     <header className="site-header">
       <div className="header-inner">
-        <Link
-          href="/"
-          className="brand"
-          aria-label="Campus Boost — accueil"
-          onClick={() => setOpen(false)}
-        >
-          <Image
-            src="/brand/campus-boost.webp"
-            width={105}
-            height={70}
-            priority
-            alt="Campus Boost"
-          />
-          <span className="brand-divider" aria-hidden="true" />
-          <span className="university-wordmark">
-            UNIVERSITÉ
-            <br />
-            <strong>PARIS CITÉ</strong>
-          </span>
-        </Link>
+        <Brand onNavigate={() => setOpen(false)} />
         <nav className="desktop-nav" aria-label="Navigation principale">
           {links.map((link) => (
             <Link key={link.href} href={link.href}>
               {link.label}
             </Link>
           ))}
+          <details className="explore-menu" ref={desktopMenu}>
+            <summary>
+              Explorer <span aria-hidden="true">+</span>
+            </summary>
+            <div>
+              {moreLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => {
+                    if (desktopMenu.current) desktopMenu.current.open = false;
+                  }}
+                >
+                  {link.label}
+                  <ArrowUpRight size={14} aria-hidden="true" />
+                </Link>
+              ))}
+            </div>
+          </details>
         </nav>
         <div className="header-actions">
           <Link
@@ -91,7 +147,11 @@ export function Header() {
           className="mobile-nav"
           aria-label="Navigation mobile"
         >
-          {links.map((link) => (
+          {[
+            ...links,
+            ...moreLinks,
+            { href: "/demo", label: "La démonstration" },
+          ].map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -107,6 +167,9 @@ export function Header() {
           </Link>
         </nav>
       )}
+      <div className="reading-track" aria-hidden="true">
+        <div ref={progress} className="reading-progress" />
+      </div>
     </header>
   );
 }

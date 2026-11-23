@@ -4,7 +4,14 @@ import { sectors } from "../src/data/sectors.ts";
 import { projects } from "../src/data/projects.ts";
 import { programs } from "../src/data/programs.ts";
 import { skills } from "../src/data/skills.ts";
-import { equipment } from "../src/data/impact.ts";
+import { equipment, impactCategories } from "../src/data/impact.ts";
+import {
+  publishedRealizations,
+  projectDomains,
+} from "../src/data/realizations.ts";
+import { campusEvents, getEventStatus } from "../src/data/events.ts";
+import { competitionPartners } from "../src/data/competitions.ts";
+import { solteaRoadmap } from "../src/data/roadmap.ts";
 import { getMatches, getRelevantSkills } from "../src/lib/matching.ts";
 import { normalizeAmount, simulateEquipment } from "../src/lib/simulator.ts";
 
@@ -88,5 +95,66 @@ test("les statuts différencient les sources et le rattachement de la L3", () =>
     programs
       .find((program) => program.id === "mva")
       ?.affiliationNote?.includes("ENS Paris-Saclay"),
+  );
+});
+
+test("la V2 ne relie que des contenus existants et des réalisations documentées", () => {
+  assert.equal(impactCategories.length, 6);
+  const programIds = new Set(programs.map((program) => program.id));
+  const projectIds = new Set(projects.map((project) => project.id));
+  const skillIds = new Set(skills.map((skill) => skill.id));
+  for (const need of impactCategories) {
+    assert(
+      need.programIds.length && need.projectIds.length && need.skills.length,
+    );
+    need.programIds.forEach((id) => assert(programIds.has(id)));
+    need.projectIds.forEach((id) => assert(projectIds.has(id)));
+    need.skills.forEach((id) => assert(skillIds.has(id)));
+  }
+  for (const project of publishedRealizations) {
+    assert(project.evidence.url.startsWith("https://"));
+    assert(project.evidence.checkedAt);
+    assert(project.images.length > 0);
+    project.programIds.forEach((id) => assert(programIds.has(id)));
+    project.skills.forEach((id) => assert(skillIds.has(id)));
+    project.domains.forEach((domain) =>
+      assert(projectDomains.some((item) => item.id === domain)),
+    );
+    project.participants?.forEach((person) => assert(person.consentDate));
+  }
+  assert(
+    competitionPartners.every(
+      (partner) => partner.participationSource && partner.logoPermissionDate,
+    ),
+  );
+  assert(solteaRoadmap.every((step) => step.date === "À confirmer"));
+});
+
+test("les événements distinguent échéance passée et preuve de participation", () => {
+  const event = campusEvents[0];
+  assert.equal(getEventStatus(event, "2026-12-03"), "envisaged");
+  assert.equal(getEventStatus(event, "2026-12-04"), "envisaged");
+  assert.equal(getEventStatus(event, "2026-12-05"), "past");
+  assert.equal(
+    getEventStatus({ ...event, participation: "confirmed" }, "2026-12-03"),
+    "envisaged",
+  );
+  assert.equal(
+    getEventStatus(
+      {
+        ...event,
+        participation: "confirmed",
+        confirmationSource: "https://example.org/proof",
+      },
+      "2026-12-03",
+    ),
+    "confirmed",
+  );
+  assert.equal(
+    getEventStatus(
+      { ...event, startDate: undefined, endDate: undefined },
+      "2027-10-01",
+    ),
+    "envisaged",
   );
 });

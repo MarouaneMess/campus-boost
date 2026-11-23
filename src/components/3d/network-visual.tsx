@@ -53,6 +53,17 @@ export function NetworkVisual({
   const [sceneReady, setSceneReady] = useState(false);
   const onError = useCallback(() => setFailed(true), []);
   const onReady = useCallback(() => setSceneReady(true), []);
+  const monitorCanvas = useCallback(
+    (element: HTMLDivElement | null) => {
+      if (!element) return;
+      // La capture écoute dès l’insertion DOM, avant l’initialisation asynchrone de Three.
+      // Le nettoyage du ref précède la libération volontaire du contexte au démontage.
+      element.addEventListener("webglcontextlost", onError, true);
+      return () =>
+        element.removeEventListener("webglcontextlost", onError, true);
+    },
+    [onError],
+  );
   useEffect(() => {
     const media = matchMedia("(prefers-reduced-motion: reduce)");
     const updateCapability = () => {
@@ -111,7 +122,7 @@ export function NetworkVisual({
         <StaticNetwork dark={dark} active={active} />
       </div>
       {animated && (
-        <div className="network-canvas" aria-hidden="true">
+        <div ref={monitorCanvas} className="network-canvas" aria-hidden="true">
           <CanvasBoundary
             fallback={<StaticNetwork dark={dark} active={active} />}
             onError={onError}
@@ -120,7 +131,6 @@ export function NetworkVisual({
               dark={dark}
               selection={selection}
               active={active}
-              onError={onError}
               onReady={onReady}
             />
           </CanvasBoundary>

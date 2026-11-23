@@ -8,6 +8,12 @@ import { Stories } from "@/components/stories";
 import { VideoSection } from "@/components/video-section";
 import { SolteaGuide } from "@/components/soltea-guide";
 import { Reveal } from "@/components/reveal";
+import { UfrEcosystem } from "@/components/ufr-ecosystem";
+import { Realizations } from "@/components/realizations";
+import { CampusEvents } from "@/components/campus-events";
+import { Competitions } from "@/components/competitions";
+import { Roadmap } from "@/components/roadmap";
+import { AmbassadorKit } from "@/components/ambassador-kit";
 
 export default function Home() {
   return (
@@ -16,12 +22,14 @@ export default function Home() {
       <Reveal>
         <About />
       </Reveal>
+      <UfrEcosystem />
       <MatchExplorer />
       <Reveal>
         <WhyUfr />
       </Reveal>
       <ImpactSection />
       <Programs />
+      <Realizations />
       <Projects />
       <Reveal>
         <Stories />
@@ -29,7 +37,11 @@ export default function Home() {
       <Reveal>
         <VideoSection />
       </Reveal>
+      <CampusEvents />
+      <Competitions />
+      <Roadmap />
       <SolteaGuide />
+      <AmbassadorKit />
     </main>
   );
 }

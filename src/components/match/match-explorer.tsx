@@ -14,6 +14,8 @@ import { sectors } from "@/data/sectors";
 import { projects } from "@/data/projects";
 import { skillById } from "@/data/skills";
 import { siteConfig } from "@/data/site";
+import { publishedRealizations } from "@/data/realizations";
+import { impactCategories } from "@/data/impact";
 import { getMatches, getRelevantSkills } from "@/lib/matching";
 import { SectorIcon, SectionHeading, ExternalLink } from "@/components/ui";
 import { ProgramCard } from "./program-card";
@@ -31,6 +33,12 @@ export function MatchExplorer() {
   const sector = sectors.find((item) => item.id === sectorId);
   const matches = sector ? getMatches(sector, selectedNeeds) : [];
   const relevantSkills = sector ? getRelevantSkills(sector, selectedNeeds) : [];
+  const relatedRealizations = publishedRealizations.filter((item) =>
+    item.skills.some((skill) => relevantSkills.includes(skill)),
+  );
+  const relatedFunding = impactCategories.filter((item) =>
+    item.skills.some((skill) => relevantSkills.includes(skill)),
+  );
   const project = projects.find((item) => item.id === sector?.projectId);
   const selection = sectors.findIndex((item) => item.id === sectorId);
   function chooseSector(id: SectorId) {
@@ -299,6 +307,77 @@ export function MatchExplorer() {
                     </a>
                   </div>
                 )}
+                {selectedNeeds.length > 0 && (
+                  <div className="match-next-steps">
+                    <div>
+                      <p className="eyebrow">
+                        <span /> 05 · LES RÉALISATIONS ÉTUDIANTES
+                      </p>
+                      <h3>Des compétences mises en pratique</h3>
+                      {relatedRealizations.length ? (
+                        relatedRealizations.map((item) => (
+                          <a
+                            className="match-related-link"
+                            key={item.id}
+                            href={`#realisation-${item.id}`}
+                          >
+                            <strong>{item.title}</strong>
+                            <span>
+                              Lien par compétences communes :{" "}
+                              {item.skills
+                                .filter((skill) =>
+                                  relevantSkills.includes(skill),
+                                )
+                                .map((skill) => skillById[skill].short)
+                                .join(", ")}
+                              .
+                            </span>
+                            <span className="text-link">
+                              Voir la réalisation documentée{" "}
+                              <ArrowUpRight size={15} aria-hidden="true" />
+                            </span>
+                          </a>
+                        ))
+                      ) : (
+                        <p>
+                          Aucune réalisation publiée ne correspond encore à ces
+                          compétences.{" "}
+                          <a className="text-link" href="#realisations">
+                            Explorer la vitrine étudiante
+                          </a>
+                        </p>
+                      )}
+                    </div>
+                    <div>
+                      <p className="eyebrow">
+                        <span /> 06 · LES MOYENS POUR APPRENDRE
+                      </p>
+                      <h3>Des besoins pédagogiques à explorer</h3>
+                      <ul>
+                        {relatedFunding.map((item) => (
+                          <li key={item.number}>
+                            <a href={`#besoin-${item.number}`}>
+                              <strong>{item.title}</strong>
+                              <span>
+                                {item.skills
+                                  .filter((skill) =>
+                                    relevantSkills.includes(skill),
+                                  )
+                                  .map((skill) => skillById[skill].short)
+                                  .join(" · ")}
+                              </span>
+                              <ArrowUpRight size={16} aria-hidden="true" />
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="method-note">
+                        Liens proposés par compétences communes. Usages et
+                        besoins à valider avec l’UFR.
+                      </p>
+                    </div>
+                  </div>
+                )}
                 <div className="match-cta">
                   <div>
                     <Sparkles size={21} aria-hidden="true" />
@@ -316,7 +395,7 @@ export function MatchExplorer() {
                       <ArrowRight size={15} aria-hidden="true" />
                     </a>
                     <a href="#soutenir" className="button button-primary">
-                      Comment soutenir notre UFR ?{" "}
+                      Soutenir les talents de votre secteur{" "}
                       <ArrowUpRight size={17} aria-hidden="true" />
                     </a>
                     <ExternalLink href={siteConfig.soltea.url}>

@@ -30,10 +30,10 @@ export function About() {
             Entre l’université et le monde professionnel.
           </p>
           <p>
-            Nous sommes sept étudiants de l’Université Paris Cité. Avec Campus
-            Boost, nous rendons visibles les connexions entre les métiers des
-            entreprises et les formations de notre UFR Mathématiques et
-            Informatique.
+            Nous sommes sept étudiants du Master 1 MIAGE d’Université Paris
+            Cité. Avec Campus Boost, nous rendons visibles les connexions entre
+            les métiers des entreprises et les formations de notre UFR
+            Mathématiques et Informatique.
           </p>
           <p>
             Notre ambition : vous aider à comprendre comment l’affectation de

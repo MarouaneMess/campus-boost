@@ -26,10 +26,11 @@ export default function LegalPage() {
           aucun paiement.
         </p>
         <p>
-          Cette version est préparée pour un usage local. Avant une publication,
-          l’équipe devra renseigner l’identité et les coordonnées de l’éditeur,
-          le responsable de publication ainsi que les informations de
-          l’hébergeur effectivement retenu.
+          Les informations éditoriales de cette présentation restent à compléter
+          par l’équipe : identité et coordonnées de l’éditeur, le responsable de
+          publication ainsi que les informations de l’hébergeur effectivement
+          retenu. La V2 est préparée localement ; sa publication relève de
+          l’équipe CampusBoost.
         </p>
       </section>
       <section>
@@ -49,8 +50,17 @@ export default function LegalPage() {
         </p>
         <p>
           Les liens officiels ouvrent des sites externes avec leurs propres
-          règles. L’hébergeur choisi lors d’une future publication pourra
-          conserver des journaux techniques selon sa configuration.
+          règles. L’hébergeur du site publié peut conserver des journaux
+          techniques selon sa configuration.
+        </p>
+      </section>
+      <section>
+        <h2>Supports et partage</h2>
+        <p>
+          Le kit ambassadeur permet de copier du texte dans votre presse-papiers
+          et de télécharger des supports. Ces actions sont déclenchées par vos
+          boutons de copie ou de téléchargement. Aucun email ni message LinkedIn
+          n’est envoyé automatiquement.
         </p>
       </section>
       <section>
