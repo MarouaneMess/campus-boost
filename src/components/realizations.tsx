@@ -139,7 +139,7 @@ export function Realizations() {
               Aucun projet réel publié pour ce domaine. Les propositions
               pédagogiques ci-dessous donnent des pistes à explorer.
             </p>
-            <a href="#projets" className="text-link">
+            <a href="#sujets" className="text-link">
               Découvrir les idées de projets{" "}
               <ArrowRight size={16} aria-hidden="true" />
             </a>
@@ -150,7 +150,7 @@ export function Realizations() {
             Vous avez un projet à partager ? Préparez une description, une
             démonstration et l’accord de l’équipe avec le kit ambassadeur.
           </p>
-          <a className="text-link" href="#ambassadeurs">
+          <a className="text-link" href="/ambassadeurs#ambassadeurs">
             Préparer une présentation{" "}
             <ArrowUpRight size={16} aria-hidden="true" />
           </a>

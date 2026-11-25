@@ -156,7 +156,7 @@ export function Stories() {
             : "Les témoignages identifiés comme réels sont publiés avec l’accord des personnes concernées. Les autres emplacements restent signalés."}
         </p>
         <div className="section-endnote">
-          <a href="#match" className="text-link">
+          <a href="/entreprises#match" className="text-link">
             Explorez les compétences de notre UFR{" "}
             <ArrowUpRight size={16} aria-hidden="true" />
           </a>

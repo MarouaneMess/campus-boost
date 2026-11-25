@@ -299,9 +299,9 @@ export function MatchExplorer() {
                       </span>
                     </div>
                     <a
-                      href={`#projet-${project.id}`}
+                      href="#sujets"
                       className="icon-button"
-                      aria-label={`Découvrir le projet : ${project.title}`}
+                      aria-label="Explorer les idées de projets par formation"
                     >
                       <ArrowUpRight />
                     </a>
@@ -390,8 +390,8 @@ export function MatchExplorer() {
                     </p>
                   </div>
                   <div className="match-cta-links">
-                    <a href="#projets" className="text-link">
-                      Les projets pédagogiques{" "}
+                    <a href="#sujets" className="text-link">
+                      Les idées de projets par formation{" "}
                       <ArrowRight size={15} aria-hidden="true" />
                     </a>
                     <a href="#soutenir" className="button button-primary">

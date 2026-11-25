@@ -1,5 +1,5 @@
 /* Cache exclusivement local : aucun service tiers, aucune donnée d’entreprise. */
-const CACHE = "campus-boost-demo-v2";
+const CACHE = "campus-boost-demo-v3";
 self.addEventListener("install", () => self.skipWaiting());
 self.addEventListener("activate", (event) => {
   event.waitUntil(

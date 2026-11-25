@@ -10,7 +10,6 @@ import {
 } from "lucide-react";
 import { impactCategories } from "@/data/impact";
 import { programs } from "@/data/programs";
-import { projects } from "@/data/projects";
 import { SectionHeading } from "@/components/ui";
 import { ImpactSimulator } from "./impact-simulator";
 
@@ -71,16 +70,9 @@ export function ImpactSection() {
                       );
                     })}
                   </div>
-                  <h4>Scénarios pédagogiques associés</h4>
-                  <ul>
-                    {category.projectIds.map((id) => (
-                      <li key={id}>
-                        <a href={`#projet-${id}`}>
-                          {projects.find((item) => item.id === id)!.title}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+                  <a href="#sujets" className="text-link">
+                    Explorer les idées de projets par formation
+                  </a>
                   <h4>Bénéfice envisagé pour les étudiants</h4>
                   <p>{category.benefit}</p>
                 </details>

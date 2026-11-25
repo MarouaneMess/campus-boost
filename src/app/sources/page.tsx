@@ -23,8 +23,9 @@ export default function SourcesPage() {
       </h1>
       <p className="document-lead">
         Formations et identifiants : {siteConfig.verificationLabel}. Compléments
-        V2, événements et calendrier : 18 novembre 2026. Campus Boost est un
-        projet étudiant, distinct des sites institutionnels officiels.
+        V2 et événements : 18 novembre 2026. Calendrier et contacts : 25
+        novembre 2026. Campus Boost est un projet étudiant, distinct des sites
+        institutionnels officiels.
       </p>
       <section>
         <h2>Les formations et leur statut</h2>
@@ -68,12 +69,7 @@ export default function SourcesPage() {
                       <span className="sr-only"> (nouvel onglet)</span>
                     </a>
                   </td>
-                  <td>
-                    {eligibilityLabels[program.eligibility]}
-                    {program.affiliationNote && (
-                      <p>{program.affiliationNote}</p>
-                    )}
-                  </td>
+                  <td>{eligibilityLabels[program.eligibility]}</td>
                 </tr>
               ))}
             </tbody>
@@ -122,10 +118,10 @@ export default function SourcesPage() {
         </p>
       </section>
       <section>
-        <h2>Les projets et le simulateur</h2>
+        <h2>Les idées de projets et le simulateur</h2>
         <p>
-          Les huit projets pédagogiques et les six catégories d’équipements sont
-          des propositions à valider avec l’UFR. Aucun achat, financement,
+          Les idées de projets par formation et les six catégories d’équipements
+          sont des propositions à valider avec l’UFR. Aucun achat, financement,
           résultat mesuré ou partenariat n’est annoncé comme réalisé.
         </p>
         <p>
@@ -230,8 +226,8 @@ export default function SourcesPage() {
           </ExternalLink>
         </div>
         <p>
-          {campaign2027.note} La feuille de route CampusBoost est un ordre de
-          travail proposé et non un calendrier d’actions confirmées.
+          {campaign2027.note} Les échanges et interventions proposés aux
+          entreprises restent à convenir avec l’UFR.
         </p>
       </section>
       <section>

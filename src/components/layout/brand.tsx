@@ -18,20 +18,13 @@ export function Brand({ onNavigate }: { onNavigate?: () => void }) {
         priority
       />
       <Image
-        className="university-logo"
-        src="/brand/universite-paris-cite.png"
-        width={150}
-        height={58}
-        alt="Université Paris Cité"
+        className="ufr-logo"
+        src="/brand/ufr-mathematiques-informatique.jpg"
+        width={2560}
+        height={805}
+        alt="UFR Mathématiques et Informatique — Université Paris Cité"
         priority
       />
-      <span className="ufr-badge">
-        <span>UFR</span>
-        <strong>
-          Mathématiques
-          <br className="badge-break" /> et Informatique
-        </strong>
-      </span>
     </Link>
   );
 }

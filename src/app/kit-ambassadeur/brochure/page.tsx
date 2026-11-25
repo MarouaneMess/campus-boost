@@ -3,7 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { programs } from "@/data/programs";
 import { siteConfig } from "@/data/site";
-import { shareUrl, ufrPitch, solteaExplanation } from "@/data/ambassador";
+import {
+  siteUrl,
+  shareUrl,
+  ufrPitch,
+  solteaExplanation,
+} from "@/data/ambassador";
 import { solteaSteps } from "@/data/soltea";
 
 export const metadata: Metadata = {
@@ -15,7 +20,10 @@ export const metadata: Metadata = {
 export default function BrochurePage() {
   return (
     <main id="main-content" className="brochure-page container">
-      <Link href="/#ambassadeurs" className="text-link brochure-back">
+      <Link
+        href="/ambassadeurs#ambassadeurs"
+        className="text-link brochure-back"
+      >
         ← Retour au kit ambassadeur
       </Link>
       <article className="brochure-sheet">
@@ -27,10 +35,11 @@ export default function BrochurePage() {
             height={97}
           />
           <Image
-            src="/brand/universite-paris-cite.png"
-            alt="Université Paris Cité"
-            width={190}
-            height={74}
+            src="/brand/ufr-mathematiques-informatique.jpg"
+            alt="UFR Mathématiques et Informatique — Université Paris Cité"
+            width={2560}
+            height={805}
+            className="brochure-ufr-logo"
           />
         </div>
         <p className="eyebrow">
@@ -112,7 +121,7 @@ export default function BrochurePage() {
           </p>
           <p>
             <strong>Campagne 2027 : dates d’affectation à confirmer.</strong>{" "}
-            Vérification des annonces au 18 novembre 2026. Le calendrier
+            Vérification des annonces au 25 novembre 2026. Le calendrier
             d’habilitation des établissements est une procédure distincte.
           </p>
         </div>
@@ -133,14 +142,14 @@ export default function BrochurePage() {
               </a>
             </li>
             <li>
-              <a href={`${shareUrl}sources`}>
-                Sources et limites : {shareUrl}sources
+              <a href={`${siteUrl}sources`}>
+                Sources et limites : {siteUrl}sources
               </a>
             </li>
           </ul>
         </section>
         <p className="method-note">
-          Support étudiant préparé le 18 novembre 2026. Les références des
+          Support étudiant préparé le 25 novembre 2026. Les références des
           formations reposent sur des sources 2026, à revérifier pour la
           nouvelle campagne. CampusBoost n’est pas une plateforme de paiement ni
           le site institutionnel de l’université. Support à valider avec l’UFR.

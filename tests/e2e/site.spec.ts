@@ -7,7 +7,7 @@ test("MATCH relie les huit secteurs, gère la sélection vide et filtre les form
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/");
+  await page.goto("/entreprises");
   await expect(
     page.getByRole("heading", { name: /Investissez dans/ }),
   ).toBeVisible();
@@ -68,7 +68,7 @@ test("MATCH relie les huit secteurs, gère la sélection vide et filtre les form
 test("le simulateur calcule les équivalences et ajuste les limites", async ({
   page,
 }) => {
-  await page.goto("/#simulateur");
+  await page.goto("/entreprises#simulateur");
   const simulator = page.locator(".impact-simulator");
   const amount = simulator.getByRole("spinbutton", {
     name: "Votre budget hypothétique",
@@ -155,7 +155,7 @@ test("menu mobile, navigation clavier, tailles d’écran et mouvement réduit",
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/");
+  await page.goto("/entreprises");
   await page.keyboard.press("Tab");
   await expect(
     page.getByRole("link", { name: "Aller au contenu" }),
@@ -185,7 +185,7 @@ test("menu mobile, navigation clavier, tailles d’écran et mouvement réduit",
     ).toBe(true);
   }
   await mkdir(".local", { recursive: true });
-  await page.goto("/");
+  await page.goto("/entreprises");
   await page.screenshot({ path: ".local/home-hero-desktop.png" });
   await page.screenshot({ path: ".local/home-desktop.png", fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
@@ -196,7 +196,7 @@ test("menu mobile, navigation clavier, tailles d’écran et mouvement réduit",
 test("les pages et les interactions principales passent les contrôles axe WCAG AA", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/entreprises");
   await page
     .locator(".sector-grid")
     .getByRole("button", { name: "Aviation et aéronautique" })
@@ -242,7 +242,7 @@ test("les routes éditoriales et l’absence de WebGL ne bloquent pas le contenu
       return original.apply(this, args);
     } as typeof original;
   });
-  await page.goto("/");
+  await page.goto("/entreprises");
   await expect(page.locator(".hero-art .static-network")).toBeVisible();
   await expect(page.locator(".network-canvas")).toHaveCount(0);
   for (const path of ["/sources", "/mentions-legales", "/demo"]) {
@@ -277,7 +277,7 @@ test("le réseau 3D se met en pause, reprend et résiste à une perte de context
     Object.defineProperty(navigator, "deviceMemory", { get: () => 8 });
     Object.defineProperty(navigator, "hardwareConcurrency", { get: () => 8 });
   });
-  await page.goto("/");
+  await page.goto("/entreprises");
   await expect(page.locator(".hero-art canvas")).toBeVisible();
   await expect(page.locator(".hero-art .network-fallback")).toHaveClass(
     /under-canvas/,

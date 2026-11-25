@@ -5,14 +5,11 @@ import { readFile } from "node:fs/promises";
 test("la communauté, les réalisations et leurs filtres fonctionnent au clavier", async ({
   page,
 }) => {
-  await page.goto("/");
-  await expect(page.locator("header .ufr-badge")).toContainText(
-    "Mathématiques",
-  );
+  await page.goto("/entreprises");
   await expect
     .poll(() =>
       page
-        .locator("header .university-logo")
+        .locator("header .ufr-logo")
         .evaluate((img) => (img as HTMLImageElement).naturalWidth > 0),
     )
     .toBe(true);
@@ -66,7 +63,7 @@ test("la communauté, les réalisations et leurs filtres fonctionnent au clavier
 test("MATCH ouvre une réalisation et relie les besoins pédagogiques", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/entreprises");
   await page
     .getByRole("group", { name: "Choisir votre secteur d’activité" })
     .getByRole("button", { name: "Informatique et conseil" })
@@ -94,18 +91,16 @@ test("MATCH ouvre une réalisation et relie les besoins pédagogiques", async ({
     "Développer, tester et présenter une application",
   );
   await need
-    .getByRole("link", { name: "Un outil métier, de l’idée au prototype" })
+    .getByRole("link", { name: "Explorer les idées de projets par formation" })
     .click();
-  await expect(page.locator("#projet-software")).toBeVisible();
-  await expect(page.locator("#projet-software")).toContainText(
-    "Proposition à valider avec l’UFR",
-  );
+  await expect(page.locator("#topics-title")).toBeInViewport();
+  await expect(page.locator("#sujets .topic-card")).toHaveCount(8);
 });
 
 test("témoignages, calendrier et événements gardent leurs statuts explicites", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/ambassadeurs");
   const stories = page.locator("#temoignages");
   for (const label of ["Étudiants actuels", "Alumni", "Enseignants"]) {
     await stories.getByRole("button", { name: label, exact: true }).click();
@@ -114,6 +109,7 @@ test("témoignages, calendrier et événements gardent leurs statuts explicites"
       "Témoignage à recueillir",
     );
   }
+  await page.goto("/entreprises#terrain");
   const events = page.locator("#terrain");
   await events.getByRole("button", { name: "Confirmés", exact: true }).click();
   await expect(events).toContainText("Aucune participation confirmée");
@@ -128,17 +124,19 @@ test("témoignages, calendrier et événements gardent leurs statuts explicites"
   await expect(events.locator(".event-card").first()).toContainText(
     "Action proposée",
   );
+  await page.goto("/ambassadeurs#competitions");
   await page.locator("#competitions summary").first().click();
   await expect(page.locator("#competitions")).toContainText(
     "France Cybersecurity Challenge",
   );
+  await page.goto("/entreprises#calendrier");
   await expect(page.locator(".soltea-timeline .timeline-status")).toHaveText([
     "À confirmer",
     "À confirmer",
     "À confirmer",
     "À confirmer",
   ]);
-  await expect(page.locator(".campus-timeline > li")).toHaveCount(8);
+  await expect(page.locator(".company-actions > article")).toHaveCount(2);
 });
 
 test("le kit copie les vrais modèles et télécharge des fichiers complets", async ({
@@ -147,7 +145,7 @@ test("le kit copie les vrais modèles et télécharge des fichiers complets", as
   request,
 }) => {
   await context.grantPermissions(["clipboard-read", "clipboard-write"]);
-  await page.goto("/#ambassadeurs");
+  await page.goto("/ambassadeurs#ambassadeurs");
   const kit = page.locator("#ambassadeurs");
   await kit
     .getByRole("button", { name: "Message LinkedIn", exact: true })
@@ -169,7 +167,7 @@ test("le kit copie les vrais modèles et télécharge des fichiers complets", as
   expect((await readFile(file!, "utf8")).replace(/^\uFEFF/, "")).toBe(template);
   await kit.getByRole("button", { name: "Copier le lien à partager" }).click();
   expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
-    "https://campus-boost.vercel.app/",
+    "https://campus-boost.vercel.app/entreprises",
   );
   const pdf = await request.get("/documents/campusboost-brochure.pdf");
   expect(pdf.ok()).toBe(true);
@@ -197,7 +195,7 @@ test("le kit copie les vrais modèles et télécharge des fichiers complets", as
 test("la navigation V2 reste utilisable aux tailles mobiles et intermédiaires", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/entreprises");
   for (const width of [320, 390, 768, 1024, 1200, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await expect
@@ -206,18 +204,23 @@ test("la navigation V2 reste utilisable aux tailles mobiles et intermédiaires",
       )
       .toBe(true);
     const brand = page.locator("header .brand-system");
-    await expect(brand.locator(".university-logo")).toBeVisible();
-    await expect(brand.locator(".ufr-badge")).toBeVisible();
+    await expect(brand.locator(".ufr-logo")).toBeVisible();
   }
   await page.setViewportSize({ width: 390, height: 844 });
   await page.getByRole("button", { name: "Ouvrir le menu" }).click();
   const nav = page.getByRole("navigation", { name: "Navigation mobile" });
-  await nav.getByRole("link", { name: "Le kit ambassadeur" }).click();
+  await nav.getByRole("link", { name: "Changer de parcours" }).click();
+  await page
+    .getByRole("link", { name: "Je suis un ambassadeur", exact: true })
+    .click();
+  await page.getByRole("button", { name: "Ouvrir le menu" }).click();
+  await nav.getByRole("link", { name: "Kit ambassadeur", exact: true }).click();
   await expect(nav).toHaveCount(0);
   await expect(page).toHaveURL(/#ambassadeurs$/);
   await expect(page.locator("#ambassador-title")).toBeInViewport();
+  await page.goto("/entreprises");
   await page.getByRole("button", { name: "Ouvrir le menu" }).click();
-  await nav.getByRole("link", { name: "La feuille de route" }).click();
+  await nav.getByRole("link", { name: "Calendrier", exact: true }).click();
   await expect(page.locator("#roadmap-title")).toBeInViewport();
   const mobile = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21aa"])

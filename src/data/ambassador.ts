@@ -1,7 +1,8 @@
 import { siteConfig } from "./site.ts";
 import { solteaSteps } from "./soltea.ts";
 
-export const shareUrl = "https://campus-boost.vercel.app/";
+export const siteUrl = "https://campus-boost.vercel.app/";
+export const shareUrl = `${siteUrl}entreprises`;
 export const ufrPitch =
   "L’UFR Mathématiques et Informatique d’Université Paris Cité forme à l’informatique, aux mathématiques appliquées et aux systèmes d’information. CampusBoost, initiative étudiante du M1 MIAGE, propose de découvrir ces compétences, les projets et les possibilités de soutien aux formations habilitées via SOLTéA.";
 export const solteaExplanation =
@@ -33,7 +34,7 @@ export const ambassadorTemplates = [
     label: "Expliquer SOLTéA",
     filename: "campusboost-guide-soltea.txt",
     hint: "Repères généraux à relire avec les informations de la campagne en cours.",
-    text: `${solteaExplanation}\n\n${solteaSteps.map((step, index) => `${index + 1}. ${step.title}\n${step.description}\n${step.detail}`).join("\n\n")}\n\nUniversité Paris Cité · UAI ${siteConfig.soltea.uai} · SIRET ${siteConfig.soltea.siret}\nPréciser ensuite la composante UFR Mathématiques et Informatique ou la formation habilitée.\n\nCampagne 2027 : dates d’affectation à confirmer au 18 novembre 2026.\nPlateforme officielle : ${siteConfig.soltea.url}\nGuide officiel : ${siteConfig.soltea.guideUrl}\nSource UFR : ${siteConfig.soltea.ufrUrl}`,
+    text: `${solteaExplanation}\n\n${solteaSteps.map((step, index) => `${index + 1}. ${step.title}\n${step.description}\n${step.detail}`).join("\n\n")}\n\nUniversité Paris Cité · UAI ${siteConfig.soltea.uai} · SIRET ${siteConfig.soltea.siret}\nPréciser ensuite la composante UFR Mathématiques et Informatique ou la formation habilitée.\n\nCampagne 2027 : dates d’affectation à confirmer au 25 novembre 2026.\nPlateforme officielle : ${siteConfig.soltea.url}\nGuide officiel : ${siteConfig.soltea.guideUrl}\nSource UFR : ${siteConfig.soltea.ufrUrl}`,
   },
   {
     id: "project",

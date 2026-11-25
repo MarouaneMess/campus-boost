@@ -94,7 +94,7 @@ export function Hero() {
         </div>
       </div>
       <div className="container hero-bottom">
-        <a href="#projet">
+        <a href="#ufr">
           <ArrowDown size={17} aria-hidden="true" />
           <span>L’avenir commence ici</span>
         </a>

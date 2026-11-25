@@ -6,6 +6,7 @@ import "@fontsource/dm-sans/latin-700.css";
 import "@fontsource/instrument-serif/latin-400-italic.css";
 import "@/styles/globals.css";
 import "@/styles/v2.css";
+import "@/styles/audience.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Providers } from "@/components/providers";

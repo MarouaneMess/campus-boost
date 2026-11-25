@@ -40,7 +40,7 @@ export function About() {
             votre solde de taxe d’apprentissage peut soutenir l’apprentissage et
             les projets pédagogiques.
           </p>
-          <a href="#match" className="text-link">
+          <a href="/entreprises#match" className="text-link">
             Trouver votre point de connexion{" "}
             <ArrowUpRight size={17} aria-hidden="true" />
           </a>

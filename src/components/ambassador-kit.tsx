@@ -143,7 +143,7 @@ export function AmbassadorKit() {
                 Copier le lien à partager
               </button>
             </div>
-            <a href="#soutenir" className="text-link">
+            <a href="/entreprises#soutenir" className="text-link">
               Le guide SOLTéA en 5 étapes{" "}
               <ArrowUpRight size={16} aria-hidden="true" />
             </a>

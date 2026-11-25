@@ -171,12 +171,11 @@ export function CampusEvents() {
         )}
         <div className="section-endnote">
           <p>
-            Un contact professionnel à rencontrer ? Le kit ambassadeur aide à
-            présenter l’UFR en quelques lignes.
+            Vous souhaitez rencontrer l’UFR ou proposer un échange avec vos
+            équipes ? Contactez-nous pour choisir le format adapté.
           </p>
-          <a href="#ambassadeurs" className="text-link">
-            Préparer un premier échange{" "}
-            <ArrowUpRight size={16} aria-hidden="true" />
+          <a href="#contact" className="text-link">
+            Contacter l’UFR <ArrowUpRight size={16} aria-hidden="true" />
           </a>
         </div>
       </div>

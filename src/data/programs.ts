@@ -95,8 +95,6 @@ export const programs: Program[] = [
       "Une double culture en informatique et en gestion des organisations.",
     skills: ["software", "management"],
     eligibility: "to-check",
-    affiliationNote:
-      "Parcours identifié par l’UFR ; la fiche de formation rattache la L3 à l’IUT Paris – Rives de Seine. Vérifier le bénéficiaire exact dans SOLTéA.",
     url: "https://odf.u-paris.fr/fr/offre-de-formation/licence-XA/sciences-technologies-sante-STS/informatique-K2VO937D/licence-informatique-parcours-methodes-informatiques-appliquees-a-la-gestion-des-entreprises-miage-M4VBZXTY.html",
   },
   {
@@ -109,8 +107,6 @@ export const programs: Program[] = [
       "Une voie de spécialisation en apprentissage et en vision, accessible sur dossier après le M1 MMAS.",
     skills: ["vision", "ai", "modeling", "statistics"],
     eligibility: "university-listed",
-    affiliationNote:
-      "Formation en partenariat, pilotée par l’ENS Paris-Saclay. L’admission et le rattachement administratif sont à confirmer individuellement.",
     url: "https://math-info.u-paris.fr/master-mathematiques-et-applications/",
   },
 ];

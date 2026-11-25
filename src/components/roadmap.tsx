@@ -1,5 +1,5 @@
-import { CalendarDays, ArrowUpRight, Route } from "lucide-react";
-import { campusRoadmap, solteaRoadmap, campaign2027 } from "@/data/roadmap";
+import { CalendarDays, ArrowUpRight } from "lucide-react";
+import { solteaRoadmap, campaign2027 } from "@/data/roadmap";
 import { SectionHeading, ExternalLink } from "@/components/ui";
 
 export function Roadmap() {
@@ -11,51 +11,17 @@ export function Roadmap() {
     >
       <div className="container">
         <SectionHeading
-          eyebrow="NOTRE FEUILLE DE ROUTE"
+          eyebrow="VOS RENDEZ-VOUS ENTREPRISES"
           id="roadmap-title"
           title={
             <>
-              Préparer les rencontres.
+              Les échéances utiles.
               <br />
-              <em>Accompagner le bon moment.</em>
+              <em>Échanger au bon moment.</em>
             </>
           }
-          description="Deux calendriers à lire en parallèle : les actions proposées par CampusBoost et les périodes réglementaires d’affectation sur SOLTéA."
+          description="Les étapes de la campagne SOLTéA qui concernent votre entreprise, puis les possibilités d’échanger avec l’UFR."
         />
-        <div className="roadmap-lane">
-          <div className="lane-heading">
-            <Route size={23} aria-hidden="true" />
-            <h3>Le parcours CampusBoost</h3>
-            <span className="status-label status-envisaged">
-              Planning prévisionnel
-            </span>
-          </div>
-          <p>
-            Un ordre de travail proposé, sans dates d’engagement. Faites défiler
-            les étapes sur ordinateur.
-          </p>
-          <div
-            className="timeline-scroll"
-            role="region"
-            aria-label="Chronologie CampusBoost, défilement horizontal"
-            tabIndex={0}
-          >
-            <ol className="timeline campus-timeline">
-              {campusRoadmap.map((step, index) => (
-                <li key={step.title}>
-                  <span className="timeline-marker">0{index + 1}</span>
-                  <span
-                    className={`timeline-status ${index === 0 ? "current" : ""}`}
-                  >
-                    {step.status}
-                  </span>
-                  <h4>{step.title}</h4>
-                  <p>{step.description}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </div>
         <div className="roadmap-lane soltea-lane">
           <div className="lane-heading">
             <CalendarDays size={23} aria-hidden="true" />
@@ -82,6 +48,29 @@ export function Roadmap() {
           <ExternalLink href={campaign2027.calendarUrl}>
             Vérifier les annonces officielles SOLTéA
           </ExternalLink>
+        </div>
+        <div className="company-actions">
+          <article>
+            <h3>Être accompagné</h3>
+            <p>
+              Échanger avec le service taxe d’apprentissage pour préparer votre
+              affectation. Rendez-vous à convenir.
+            </p>
+            <a href="#contact-taxe" className="text-link">
+              Demander un échange ↗
+            </a>
+          </article>
+          <article>
+            <h3>Donner la parole à votre entreprise</h3>
+            <p>
+              Proposer un retour d’expérience, un métier à présenter ou une
+              rencontre avec les étudiants. Format et date à convenir avec
+              l’UFR.
+            </p>
+            <a href="#contact-ufr" className="text-link">
+              Proposer une intervention ↗
+            </a>
+          </article>
         </div>
         <div className="section-endnote">
           <p>

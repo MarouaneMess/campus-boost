@@ -77,7 +77,7 @@ test("les simulations respectent le budget, les limites et des quantités entiè
   );
 });
 
-test("les statuts différencient les sources et le rattachement de la L3", () => {
+test("les statuts différencient les sources des formations", () => {
   assert.equal(
     programs.filter((program) => program.eligibility === "ufr-listed").length,
     5,
@@ -90,11 +90,6 @@ test("les statuts différencient les sources et le rattachement de la L3", () =>
   assert.equal(
     programs.find((program) => program.id === "l3-miage")?.eligibility,
     "to-check",
-  );
-  assert(
-    programs
-      .find((program) => program.id === "mva")
-      ?.affiliationNote?.includes("ENS Paris-Saclay"),
   );
 });
 

@@ -116,16 +116,16 @@ Toutes les idées d’investissement et de projets sont signalées « Propositio
 
 ## Personnaliser le contenu
 
-| Contenu                                        | Fichier                    |
-| ---------------------------------------------- | -------------------------- |
-| Secteurs, besoins et projet relié              | `src/data/sectors.ts`      |
-| Compétences et descriptions                    | `src/data/skills.ts`       |
-| Formations, liens, rattachements et sources    | `src/data/programs.ts`     |
-| Huit projets pédagogiques illustratifs         | `src/data/projects.ts`     |
-| Six catégories, équipements et prix estimatifs | `src/data/impact.ts`       |
-| Témoignages futurs                             | `src/data/testimonials.ts` |
-| Étapes d’affectation                           | `src/data/soltea.ts`       |
-| Références UAI/SIRET, dates et vidéo           | `src/data/site.ts`         |
+| Contenu                                        | Fichier                      |
+| ---------------------------------------------- | ---------------------------- |
+| Secteurs, besoins et projet relié              | `src/data/sectors.ts`        |
+| Compétences et descriptions                    | `src/data/skills.ts`         |
+| Formations, liens, rattachements et sources    | `src/data/programs.ts`       |
+| Idées de projets par formation et niveau       | `src/data/project-topics.ts` |
+| Six catégories, équipements et prix estimatifs | `src/data/impact.ts`         |
+| Témoignages futurs                             | `src/data/testimonials.ts`   |
+| Étapes d’affectation                           | `src/data/soltea.ts`         |
+| Références UAI/SIRET, dates et vidéo           | `src/data/site.ts`           |
 
 Ne pas modifier uniquement une fiche visible : garder cohérents les domaines de compétences, les sources et les statuts. Les tests métier vérifient notamment la cohérence des identifiants.
 
@@ -172,7 +172,7 @@ Le fichier original se trouve dans `logo/CampusBoost_logo.png` et reste inchang�
 
 Le script `npm run prepare:brand` retire uniquement la marge transparente, conserve le dessin et ses proportions, et génère un WebP sans perte et des icônes PNG. Le logo est réutilisé dans la navigation, le footer et le favicon.
 
-La V2 utilise le [PNG officiel de l’université](https://u-paris.fr/wp-content/uploads/2022/03/UniversiteParisCite_logo_horizontal_couleur_RVB.png), proposé sur sa [page de charte graphique](https://u-paris.fr/charte-graphique-et-outils/), consultée le 18 novembre 2026. Le fichier est conservé dans `public/brand/universite-paris-cite.png`, sans modification du dessin ni de ses couleurs. Le cartouche UFR reste un élément HTML séparé. L’usage des identités et des supports doit être validé pour une communication institutionnelle.
+Le logo UFR Mathématiques et Informatique fourni par l’utilisateur est conservé localement dans `public/brand/ufr-mathematiques-informatique.jpg`. Il remplace l’ancien cartouche textuel dans l’en-tête, le pied de page et la brochure. L’usage des identités et des supports doit être validé pour une communication institutionnelle.
 
 Tokens principaux dans `src/styles/globals.css` : marine `#0b2146`, fuchsia `#b60055`, papier `#faf9f6`. Les styles spécifiques complètent les utilitaires Tailwind pour conserver une mise en page cohérente.
 
@@ -227,3 +227,13 @@ Sous Windows, les tests utilisent Microsoft Edge installé. Sur une machine sans
 La publication reste à votre initiative. Les informations réelles de l’éditeur et de l’hébergeur doivent être renseignées dans `/mentions-legales`, les références de campagne doivent être revérifiées et les contenus définitifs validés avec l’UFR. Les métadonnées gardent `robots: noindex, nofollow` pour ce prototype ; modifier ce choix uniquement pour une version publique validée.
 
 Il n’y a volontairement ni paiement, ni compte, ni formulaire de contact non fonctionnel. Le site n’utilise pas de statistiques de collecte, de classement ou de témoignages inventés.
+
+## Parcours entreprises et ambassadeurs — 25 novembre 2026
+
+L’accueil `/` propose deux entrées distinctes : `/entreprises` (MATCH, formations, sujets, calendrier employeurs, SOLTéA et contacts) et `/ambassadeurs` (kit, initiative, témoignages, rencontres et compétitions). Les anciennes ancres partagées sont redirigées vers le bon parcours.
+
+Les huit sujets de `src/data/project-topics.ts` sont des propositions filtrables par formation et niveau L3/M1/M2, à valider avec les enseignants. Le calendrier affiche uniquement les étapes employeurs, avec les dates 2027 à confirmer, et les possibilités d’accompagnement ou de prise de parole. Les adresses officielles et leurs sources figurent dans `src/data/business-contact.ts`. Les liens email préparent un message dans la messagerie de l’utilisateur ; aucun message n’est envoyé par le site.
+
+Changements préparés localement, sans publication ni push.
+
+Validation : compilation, TypeScript, lint et 6 tests métier réussis. Les 14 scénarios navigateur passent après correction et nouvelle exécution des scénarios concernés, avec contrôles d’accessibilité et de largeur de 320 à 1440 pixels.

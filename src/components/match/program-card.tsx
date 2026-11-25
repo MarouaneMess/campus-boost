@@ -29,9 +29,6 @@ export function ProgramCard({
           </span>
         ))}
       </div>
-      {program.affiliationNote && (
-        <p className="affiliation-note">{program.affiliationNote}</p>
-      )}
       <div className="program-bottom">
         <span
           className={`eligibility ${program.eligibility === "to-check" ? "eligibility-pending" : ""}`}

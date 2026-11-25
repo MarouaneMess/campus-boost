@@ -50,7 +50,6 @@ export interface Program {
   description: string;
   skills: SkillId[];
   eligibility: Eligibility;
-  affiliationNote?: string;
   url: string;
 }
 export interface PedagogicalProject {

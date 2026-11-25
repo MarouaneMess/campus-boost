@@ -3,25 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Menu, X, ArrowUpRight, Play } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
+import { audienceNavigation, getAudience } from "@/data/navigation";
 import { Brand } from "./brand";
-
-const links = [
-  { href: "/#ufr", label: "Notre UFR" },
-  { href: "/#match", label: "MATCH" },
-  { href: "/#realisations", label: "Réalisations" },
-  { href: "/#impact", label: "Votre impact" },
-];
-const moreLinks = [
-  { href: "/#projet", label: "Le projet CampusBoost" },
-  { href: "/#formations", label: "Les 9 formations" },
-  { href: "/#projets", label: "Les idées pédagogiques" },
-  { href: "/#temoignages", label: "Les parcours" },
-  { href: "/#terrain", label: "Salons & rencontres" },
-  { href: "/#competitions", label: "Les compétitions" },
-  { href: "/#calendrier", label: "La feuille de route" },
-  { href: "/#ambassadeurs", label: "Le kit ambassadeur" },
-];
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -29,6 +13,13 @@ export function Header() {
   const desktopMenu = useRef<HTMLDetailsElement>(null);
   const progress = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const audience = getAudience(pathname);
+  const navigation = audience ? audienceNavigation[audience] : null;
+  const links = navigation?.primary ?? [
+    { href: "/entreprises", label: "Entreprises" },
+    { href: "/ambassadeurs", label: "Ambassadeurs" },
+  ];
+  const moreLinks = navigation?.more ?? [];
   useEffect(() => {
     let frame = 0;
     const update = () => {
@@ -95,39 +86,43 @@ export function Header() {
               {link.label}
             </Link>
           ))}
-          <details className="explore-menu" ref={desktopMenu}>
-            <summary>
-              Explorer <span aria-hidden="true">+</span>
-            </summary>
-            <div>
-              {moreLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => {
-                    if (desktopMenu.current) desktopMenu.current.open = false;
-                  }}
-                >
-                  {link.label}
-                  <ArrowUpRight size={14} aria-hidden="true" />
-                </Link>
-              ))}
-            </div>
-          </details>
+          {navigation && (
+            <details className="explore-menu" ref={desktopMenu}>
+              <summary>
+                Explorer <span aria-hidden="true">+</span>
+              </summary>
+              <div>
+                {moreLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => {
+                      if (desktopMenu.current) desktopMenu.current.open = false;
+                    }}
+                  >
+                    {link.label}
+                    <ArrowUpRight size={14} aria-hidden="true" />
+                  </Link>
+                ))}
+              </div>
+            </details>
+          )}
         </nav>
         <div className="header-actions">
-          <Link
-            className={`demo-link${pathname === "/demo" ? " active" : ""}`}
-            href="/demo"
-          >
-            <Play size={13} aria-hidden="true" /> Démo
-          </Link>
-          <Link
-            className="button button-small button-dark header-cta"
-            href="/#soutenir"
-          >
-            Soutenir l’UFR <ArrowUpRight size={16} aria-hidden="true" />
-          </Link>
+          {navigation && (
+            <Link className="profile-switch" href="/">
+              Changer de parcours
+            </Link>
+          )}
+          {navigation && (
+            <Link
+              className="button button-small button-dark header-cta"
+              href={navigation.action.href}
+            >
+              {navigation.action.label}
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </Link>
+          )}
           <button
             ref={menuButton}
             type="button"
@@ -150,7 +145,9 @@ export function Header() {
           {[
             ...links,
             ...moreLinks,
-            { href: "/demo", label: "La démonstration" },
+            ...(navigation
+              ? [navigation.action, { href: "/", label: "Changer de parcours" }]
+              : []),
           ].map((link) => (
             <Link
               key={link.href}
@@ -161,10 +158,6 @@ export function Header() {
               <ArrowUpRight size={17} aria-hidden="true" />
             </Link>
           ))}
-          <Link href="/#soutenir" onClick={() => setOpen(false)}>
-            Comment soutenir l’UFR ?
-            <ArrowUpRight size={17} aria-hidden="true" />
-          </Link>
         </nav>
       )}
       <div className="reading-track" aria-hidden="true">

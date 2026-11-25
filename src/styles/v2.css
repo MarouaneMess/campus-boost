@@ -4,7 +4,7 @@
 }
 .brand-system {
   display: grid;
-  grid-template-columns: 84px 112px auto;
+  grid-template-columns: 84px 184px;
   gap: 14px;
   align-items: center;
   flex-shrink: 0;
@@ -16,9 +16,9 @@
   height: 58px;
   object-fit: contain;
 }
-.brand-system .university-logo {
+.brand-system .ufr-logo {
   display: block;
-  width: 112px;
+  width: 184px;
   height: auto;
   object-fit: contain;
 }
@@ -108,7 +108,7 @@
   transform-origin: left;
 }
 .footer-brand .brand-system {
-  grid-template-columns: 84px 112px;
+  grid-template-columns: 84px 184px;
   width: fit-content;
   gap: 12px;
   margin-bottom: 20px;
@@ -1160,15 +1160,15 @@ body:has(.project-dialog[open]) {
     padding-inline: 24px;
   }
   .brand-system {
-    grid-template-columns: 76px 100px auto;
+    grid-template-columns: 76px 165px;
     gap: 10px;
   }
   .brand-system .campus-logo {
     width: 76px;
     height: 54px;
   }
-  .brand-system .university-logo {
-    width: 100px;
+  .brand-system .ufr-logo {
+    width: 165px;
   }
   .ufr-badge {
     padding-left: 10px;
@@ -1249,15 +1249,15 @@ body:has(.project-dialog[open]) {
     color: var(--accent);
   }
   .brand-system {
-    grid-template-columns: 84px 112px auto;
+    grid-template-columns: 84px 184px;
     gap: 14px;
   }
   .brand-system .campus-logo {
     width: 84px;
     height: 58px;
   }
-  .brand-system .university-logo {
-    width: 112px;
+  .brand-system .ufr-logo {
+    width: 184px;
   }
   .ufr-badge strong {
     font-size: 10px;
@@ -1328,7 +1328,7 @@ body:has(.project-dialog[open]) {
     padding-inline: 20px;
   }
   .brand-system {
-    grid-template-columns: 74px 110px;
+    grid-template-columns: 74px 128px;
     column-gap: 13px;
     row-gap: 0;
   }
@@ -1336,8 +1336,8 @@ body:has(.project-dialog[open]) {
     width: 74px;
     height: 50px;
   }
-  .brand-system .university-logo {
-    width: 110px;
+  .brand-system .ufr-logo {
+    width: 128px;
   }
   .ufr-badge {
     grid-column: 1 / -1;
@@ -1384,8 +1384,8 @@ body:has(.project-dialog[open]) {
     width: 84px;
     height: 58px;
   }
-  .footer-brand .brand-system .university-logo {
-    width: 112px;
+  .footer-brand .brand-system .ufr-logo {
+    width: 150px;
     height: auto;
   }
   .footer-brand .ufr-badge {

@@ -10,7 +10,7 @@ export function VideoSection() {
   const [failed, setFailed] = useState(false);
   const hasVideo = Boolean(siteConfig.video.src && !failed);
   return (
-    <section className="video-section">
+    <section id="video" className="video-section">
       <div className="container video-layout">
         <div className="video-copy">
           <Eyebrow>LE PROJET EN MOUVEMENT</Eyebrow>
