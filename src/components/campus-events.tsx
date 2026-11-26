@@ -52,7 +52,7 @@ export function CampusEvents() {
               <em>Créer la rencontre.</em>
             </>
           }
-          description="Des rendez-vous à explorer et des formats à construire. Une date d’événement annoncée ne signifie pas que CampusBoost y est inscrit."
+          description="Des formats où votre entreprise peut partager un métier, proposer un défi ou rencontrer les étudiants. Une date annoncée ne confirme pas la présence de CampusBoost."
         />
         <div
           className="filter-tabs wrap-filters"
@@ -110,15 +110,15 @@ export function CampusEvents() {
                   <p>{event.reason}</p>
                   <details>
                     <summary>
-                      Le projet de participation{" "}
+                      Ce que votre entreprise peut apporter{" "}
                       <ArrowUpRight size={15} aria-hidden="true" />
                     </summary>
                     <dl>
                       <dt>Pour qui ?</dt>
                       <dd>{event.audience}</dd>
-                      <dt>Entreprises à approcher</dt>
+                      <dt>Profils invités</dt>
                       <dd>{event.companyProfiles}</dd>
-                      <dt>Action proposée</dt>
+                      <dt>Une manière de participer</dt>
                       <dd>{event.action}</dd>
                     </dl>
                   </details>

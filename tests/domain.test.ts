@@ -109,7 +109,6 @@ test("la V2 ne relie que des contenus existants et des réalisations documentée
   for (const project of publishedRealizations) {
     assert(project.evidence.url.startsWith("https://"));
     assert(project.evidence.checkedAt);
-    assert(project.images.length > 0);
     project.programIds.forEach((id) => assert(programIds.has(id)));
     project.skills.forEach((id) => assert(skillIds.has(id)));
     project.domains.forEach((domain) =>

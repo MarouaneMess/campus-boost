@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { readFile } from "node:fs/promises";
 
-test("la communauté, les réalisations et leurs filtres fonctionnent au clavier", async ({
+test("les objectifs entreprises, les réalisations et leurs filtres fonctionnent au clavier", async ({
   page,
 }) => {
   await page.goto("/entreprises");
@@ -13,14 +13,23 @@ test("la communauté, les réalisations et leurs filtres fonctionnent au clavier
         .evaluate((img) => (img as HTMLImageElement).naturalWidth > 0),
     )
     .toBe(true);
-  const community = page.getByRole("group", {
-    name: "Explorer la communauté de l’UFR",
-  });
-  await community.getByRole("button", { name: /Alumni/ }).click();
-  await expect(page.locator("#ecosystem-detail")).toContainText(
-    "Le réseau des alumni",
-  );
+  await expect(
+    page
+      .getByRole("navigation", { name: "Votre objectif entreprise" })
+      .getByRole("link"),
+  ).toHaveCount(3);
   const projects = page.locator("#realisations");
+  await expect(projects.locator(".realization-card")).toHaveCount(3);
+  await projects
+    .getByRole("button", { name: /Découvrir la réalisation : Mini-SGBD/ })
+    .click();
+  await expect(page.getByRole("dialog")).toContainText("Aucun aperçu visuel");
+  await expect(
+    page
+      .getByRole("dialog")
+      .getByRole("link", { name: /Consulter le code public/ }),
+  ).toHaveAttribute("href", "https://github.com/MarouaneMess/PROJET_BBDA");
+  await page.keyboard.press("Escape");
   await projects
     .getByRole("button", { name: "Cybersécurité", exact: true })
     .click();
@@ -33,7 +42,7 @@ test("la communauté, les réalisations et leurs filtres fonctionnent au clavier
     .getByRole("button", { name: "Développement", exact: true })
     .click();
   const card = projects.getByRole("button", {
-    name: /Découvrir la réalisation/,
+    name: /Découvrir la réalisation : CampusBoost/,
   });
   await card.focus();
   await page.keyboard.press("Enter");
@@ -73,7 +82,7 @@ test("MATCH ouvre une réalisation et relie les besoins pédagogiques", async ({
     "Liens proposés par compétences communes",
   );
   const project = matched.getByRole("link", {
-    name: /Voir la réalisation documentée/,
+    name: /CampusBoost.*Voir la réalisation documentée/,
   });
   await project.click();
   await expect(page.getByRole("dialog")).toBeVisible();
@@ -119,10 +128,10 @@ test("témoignages, calendrier et événements gardent leurs statuts explicites"
   await events
     .locator(".event-card")
     .first()
-    .getByText("Le projet de participation", { exact: true })
+    .getByText("Ce que votre entreprise peut apporter", { exact: true })
     .click();
   await expect(events.locator(".event-card").first()).toContainText(
-    "Action proposée",
+    "Une manière de participer",
   );
   await page.goto("/ambassadeurs#competitions");
   await page.locator("#competitions summary").first().click();

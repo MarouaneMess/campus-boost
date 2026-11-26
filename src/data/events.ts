@@ -16,7 +16,7 @@ export const campusEvents: CampusEvent[] = [
     companyProfiles:
       "Professionnels et entreprises proposant des défis, selon la liste de l’organisateur.",
     action:
-      "Étudier l’inscription d’une équipe et préparer une restitution des apprentissages.",
+      "Proposer un défi concret, intervenir comme mentor ou partager un retour d’expérience après l’événement.",
     participation: "envisaged",
     source: {
       url: "https://www.nuitdelinfo.com/",
@@ -35,7 +35,7 @@ export const campusEvents: CampusEvent[] = [
     companyProfiles:
       "ESN, équipes SI, cabinets de conseil et recruteurs à identifier.",
     action:
-      "Proposer un stand CampusBoost et une démonstration de MATCH à l’équipe organisatrice.",
+      "Présenter un métier, apporter un cas concret ou échanger avec les étudiants sur les compétences recherchées.",
     participation: "envisaged",
   },
   {
@@ -52,7 +52,7 @@ export const campusEvents: CampusEvent[] = [
     companyProfiles:
       "Exposants de l’édition 2027 à consulter auprès de l’organisateur.",
     action:
-      "Étudier une visite de prospection, ses conditions d’accès et les contacts à préparer.",
+      "Accueillir une rencontre sur votre stand ou indiquer un temps d’échange adapté aux sujets explorés par les étudiants.",
     participation: "envisaged",
     source: {
       url: "https://vivatech.com/",
@@ -71,7 +71,7 @@ export const campusEvents: CampusEvent[] = [
     companyProfiles:
       "Équipes data et SI ; intervenants à solliciter, sans engagement acquis.",
     action:
-      "Construire un format court avec une présentation étudiante et un échange métier.",
+      "Intervenir sur un cas réel, répondre aux questions des étudiants ou confronter un sujet de cours à une pratique métier.",
     participation: "envisaged",
   },
   {
@@ -86,7 +86,7 @@ export const campusEvents: CampusEvent[] = [
     companyProfiles:
       "Acteurs du logiciel et de la donnée susceptibles de proposer un sujet.",
     action:
-      "Soumettre un cadre pédagogique, un sujet et des règles d’utilisation des données.",
+      "Apporter un défi réaliste, préciser son contexte et participer à une restitution si le format est validé avec l’UFR.",
     participation: "envisaged",
   },
   {
@@ -101,7 +101,7 @@ export const campusEvents: CampusEvent[] = [
     companyProfiles:
       "Éventuels mentors techniques à identifier ; aucun partenaire confirmé.",
     action:
-      "Identifier une compétition adaptée et organiser des séances d’entraînement.",
+      "Partager une méthode de résolution de problèmes, un retour de parcours ou une session de mentorat ponctuelle.",
     participation: "envisaged",
   },
   {
@@ -116,7 +116,7 @@ export const campusEvents: CampusEvent[] = [
     companyProfiles:
       "Contacts des étudiants et alumni, invités après validation du format.",
     action:
-      "Préparer des démonstrations, des témoignages autorisés et un point d’information SOLTéA.",
+      "Venir découvrir les projets, témoigner sur un métier ou suggérer un sujet à discuter avec l’équipe enseignante.",
     participation: "envisaged",
   },
 ];

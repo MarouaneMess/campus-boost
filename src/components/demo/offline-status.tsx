@@ -34,7 +34,7 @@ export function OfflineStatus() {
         const resources = new Set([
           "/demo",
           "/brand/campus-boost.webp",
-          "/brand/ufr-mathematiques-informatique.jpg",
+          "/brand/ufr-mathematiques-informatique.png",
           "/brand/icon.png",
           "/brand/favicon.png",
         ]);

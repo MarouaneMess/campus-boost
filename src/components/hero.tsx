@@ -32,10 +32,10 @@ export function Hero() {
             </span>
           </h1>
           <p className="hero-description">
-            Découvrez comment votre taxe d’apprentissage peut contribuer à
-            développer les compétences scientifiques et numériques de demain au
-            sein de l’UFR Mathématiques et Informatique de l’Université Paris
-            Cité.
+            Proposez un projet, rencontrez les étudiants ou soutenez une
+            formation. Découvrez les compétences de l’UFR Mathématiques et
+            Informatique d’Université Paris Cité et trouvez le bon
+            interlocuteur.
           </p>
           <div className="hero-buttons">
             <a href="#match" className="button button-primary">

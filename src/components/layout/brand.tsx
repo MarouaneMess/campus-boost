@@ -19,7 +19,7 @@ export function Brand({ onNavigate }: { onNavigate?: () => void }) {
       />
       <Image
         className="ufr-logo"
-        src="/brand/ufr-mathematiques-informatique.jpg"
+        src="/brand/ufr-mathematiques-informatique.png"
         width={2224}
         height={700}
         alt="UFR Mathématiques et Informatique — Université Paris Cité"

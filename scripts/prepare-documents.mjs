@@ -36,7 +36,7 @@ try {
   await page.emulateMedia({ media: "screen" });
   await page.evaluate(() => {
     document.body.innerHTML = `<main style="width:1200px;height:630px;padding:60px 75px;background:#faf9f6;position:relative;overflow:hidden">
-      <div style="display:flex;gap:36px;align-items:center"><img src="/brand/campus-boost.webp" alt="Campus Boost" style="width:130px;height:87px;object-fit:contain"><img src="/brand/ufr-mathematiques-informatique.jpg" alt="UFR Mathématiques et Informatique — Université Paris Cité" style="width:280px;height:auto;object-fit:contain"></div>
+      <div style="display:flex;gap:36px;align-items:center"><img src="/brand/campus-boost.webp" alt="Campus Boost" style="width:130px;height:87px;object-fit:contain"><img src="/brand/ufr-mathematiques-informatique.png" alt="UFR Mathématiques et Informatique — Université Paris Cité" style="width:280px;height:auto;object-fit:contain"></div>
       <p style="font-size:13px;letter-spacing:3px;color:#b60055;margin-top:42px">LES ENTREPRISES & LES TALENTS DE DEMAIN</p>
       <h1 style="font-size:70px;line-height:1.08;color:#0b2146;margin-top:22px;font-weight:500">Des savoirs solides.<br><em style="font-size:78px">Des connexions qui font grandir.</em></h1>
       <p style="font-size:17px;color:#5f6a7b;margin-top:28px">MATCH · Projets étudiants · Parcours · SOLTéA</p>

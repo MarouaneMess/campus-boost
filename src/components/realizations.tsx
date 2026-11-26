@@ -3,7 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, ArrowRight, CheckCircle2, Code2, X } from "lucide-react";
+import {
+  ArrowUpRight,
+  ArrowRight,
+  ArrowLeft,
+  CheckCircle2,
+  Code2,
+  X,
+} from "lucide-react";
 import { publishedRealizations, projectDomains } from "@/data/realizations";
 import { skillById } from "@/data/skills";
 import { SectionHeading, ExternalLink } from "@/components/ui";
@@ -11,11 +18,15 @@ import type { ProjectDomain, StudentRealization } from "@/types/content";
 
 export function Realizations() {
   const [filter, setFilter] = useState<ProjectDomain | "all">("all");
+  const [page, setPage] = useState(0);
   const [active, setActive] = useState<StudentRealization | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   const visible = publishedRealizations.filter(
     (project) => filter === "all" || project.domains.includes(filter),
   );
+  const pageSize = 3;
+  const pageCount = Math.ceil(visible.length / pageSize);
+  const pageProjects = visible.slice(page * pageSize, (page + 1) * pageSize);
   useEffect(() => {
     if (active) dialog.current?.showModal();
     else dialog.current?.close();
@@ -27,6 +38,7 @@ export function Realizations() {
       );
       if (project) {
         setFilter("all");
+        setPage(Math.floor(publishedRealizations.indexOf(project) / pageSize));
         setActive(project);
       }
     };
@@ -60,7 +72,7 @@ export function Realizations() {
               <em>Du concret à partager.</em>
             </>
           }
-          description="Des travaux réellement développés, accompagnés d’une source et d’un aperçu. Cette vitrine s’enrichira avec les projets et les accords de leurs équipes."
+          description="Explorez les projets publiés par leurs auteurs. Ouvrez une fiche pour découvrir la démarche, les technologies et le code source."
         />
         <div
           className="filter-tabs wrap-filters"
@@ -74,7 +86,10 @@ export function Realizations() {
                 type="button"
                 aria-pressed={filter === item.id}
                 className={filter === item.id ? "active" : ""}
-                onClick={() => setFilter(item.id as ProjectDomain | "all")}
+                onClick={() => {
+                  setFilter(item.id as ProjectDomain | "all");
+                  setPage(0);
+                }}
               >
                 {item.label}
               </button>
@@ -84,10 +99,12 @@ export function Realizations() {
         <p className="filter-result" role="status">
           {visible.length} réalisation
           {visible.length === 1 ? " documentée" : "s documentées"}
+          {pageCount > 1 &&
+            ` · ${page * pageSize + 1}–${Math.min((page + 1) * pageSize, visible.length)} affichées`}
         </p>
         {visible.length ? (
-          <div className="realizations-grid">
-            {visible.map((project) => (
+          <div className="realizations-grid" id="realizations-results">
+            {pageProjects.map((project) => (
               <article
                 className="realization-card"
                 id={`realisation-${project.id}`}
@@ -100,14 +117,26 @@ export function Realizations() {
                   aria-label={`Découvrir la réalisation : ${project.title}`}
                   aria-haspopup="dialog"
                 >
-                  <div className="realization-image">
-                    <Image
-                      src={project.images[0].src}
-                      alt={project.images[0].alt}
-                      width={1200}
-                      height={720}
-                      sizes="(max-width: 760px) 100vw, 55vw"
-                    />
+                  <div
+                    className={`realization-image${project.images.length ? "" : " realization-image-placeholder"}`}
+                  >
+                    {project.images[0] ? (
+                      <Image
+                        src={project.images[0].src}
+                        alt={project.images[0].alt}
+                        width={1200}
+                        height={720}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 33vw"
+                      />
+                    ) : (
+                      <div
+                        className="realization-placeholder"
+                        aria-hidden="true"
+                      >
+                        <Code2 size={38} strokeWidth={1.4} />
+                        <span>APERÇU DU PROJET</span>
+                      </div>
+                    )}
                     <span className="documented-label">
                       <CheckCircle2 size={14} aria-hidden="true" /> Réalisation
                       documentée
@@ -118,9 +147,12 @@ export function Realizations() {
                     <h3>{project.title}</h3>
                     <p>{project.summary}</p>
                     <div className="skill-tags">
-                      {project.technologies.map((tech) => (
+                      {project.technologies.slice(0, 2).map((tech) => (
                         <span key={tech}>{tech}</span>
                       ))}
+                      {project.technologies.length > 2 && (
+                        <span>+{project.technologies.length - 2}</span>
+                      )}
                     </div>
                     <span className="text-link">
                       Explorer le projet{" "}
@@ -144,6 +176,34 @@ export function Realizations() {
               <ArrowRight size={16} aria-hidden="true" />
             </a>
           </div>
+        )}
+        {pageCount > 1 && (
+          <nav
+            className="realizations-pagination"
+            aria-label="Pages des réalisations"
+          >
+            <button
+              type="button"
+              className="button button-outline"
+              disabled={page === 0}
+              aria-controls="realizations-results"
+              onClick={() => setPage(page - 1)}
+            >
+              <ArrowLeft size={16} aria-hidden="true" /> Précédent
+            </button>
+            <span role="status">
+              Page {page + 1} sur {pageCount}
+            </span>
+            <button
+              type="button"
+              className="button button-outline"
+              disabled={page === pageCount - 1}
+              aria-controls="realizations-results"
+              onClick={() => setPage(page + 1)}
+            >
+              Suivant <ArrowRight size={16} aria-hidden="true" />
+            </button>
+          </nav>
         )}
         <div className="section-endnote">
           <p>
@@ -185,18 +245,25 @@ export function Realizations() {
             </p>
             <h2 id="project-dialog-title">{active.title}</h2>
             <p className="muted">{active.formation}</p>
-            {active.images.map((picture) => (
-              <figure key={picture.src}>
-                <Image
-                  src={picture.src}
-                  alt={picture.alt}
-                  width={1200}
-                  height={720}
-                  sizes="(max-width: 760px) 90vw, 800px"
-                />
-                <figcaption>{picture.alt}</figcaption>
-              </figure>
-            ))}
+            {active.images.length ? (
+              active.images.map((picture) => (
+                <figure key={picture.src}>
+                  <Image
+                    src={picture.src}
+                    alt={picture.alt}
+                    width={1200}
+                    height={720}
+                    sizes="(max-width: 760px) 90vw, 800px"
+                  />
+                  <figcaption>{picture.alt}</figcaption>
+                </figure>
+              ))
+            ) : (
+              <p className="method-note project-no-preview">
+                Aucun aperçu visuel n’a été publié avec ce projet. Le dépôt
+                public détaille son architecture, son code et ses tests.
+              </p>
+            )}
             <div className="project-detail-grid">
               <div>
                 <h3>La problématique</h3>

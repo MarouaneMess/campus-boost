@@ -1,5 +1,8 @@
 import { defineConfig } from "@playwright/test";
 
+const port = process.env.PLAYWRIGHT_PORT ?? "3000";
+const baseURL = `http://127.0.0.1:${port}`;
+
 export default defineConfig({
   testDir: "./tests/e2e",
   timeout: 45000,
@@ -8,7 +11,7 @@ export default defineConfig({
   workers: 1,
   reporter: "list",
   use: {
-    baseURL: "http://127.0.0.1:3000",
+    baseURL,
     browserName: "chromium",
     channel: process.platform === "win32" ? "msedge" : undefined,
     viewport: { width: 1440, height: 1000 },
@@ -19,8 +22,8 @@ export default defineConfig({
     screenshot: "only-on-failure",
   },
   webServer: {
-    command: "npm start -- --hostname 127.0.0.1 --port 3000",
-    url: "http://127.0.0.1:3000",
+    command: `npm start -- --hostname 127.0.0.1 --port ${port}`,
+    url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
   },

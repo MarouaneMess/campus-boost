@@ -70,6 +70,7 @@ export function getLegacyDestination(hash: string): string | null {
       "soutenir",
       "sujets",
       "contact",
+      "contribuer",
       "terrain",
     ].includes(id) ||
     /^(projet-|realisation-|besoin-)/.test(id)

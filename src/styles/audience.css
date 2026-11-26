@@ -291,6 +291,111 @@
 .company-actions p {
   margin: 14px 0;
 }
+.company-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 52px;
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+.company-overview h2 {
+  margin: 15px 0;
+  font-size: clamp(32px, 3.7vw, 50px);
+  letter-spacing: -0.04em;
+  line-height: 1.03;
+}
+.company-overview > div > p:last-child {
+  max-width: 520px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+.company-overview nav {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+.company-overview nav a {
+  display: grid;
+  gap: 7px;
+  padding: 19px 0;
+  border-bottom: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
+}
+.company-overview nav strong {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  font-size: 18px;
+}
+.company-overview nav strong svg {
+  color: var(--accent);
+}
+.company-overview nav span {
+  color: var(--muted);
+  font-size: 13px;
+}
+.company-overview nav a:hover strong {
+  color: var(--accent);
+}
+.company-support {
+  padding-bottom: 0;
+  background: #f7f5f1;
+}
+.company-support > .container {
+  padding-bottom: 45px;
+}
+.support-panel {
+  border-top: 1px solid #d6d3d0;
+}
+.support-panel:last-child {
+  border-bottom: 1px solid #d6d3d0;
+}
+.support-panel > summary {
+  display: flex;
+  align-items: center;
+  min-height: 82px;
+  width: calc(100% - 112px);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 18px 24px;
+  cursor: pointer;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(21px, 2.4vw, 29px);
+  letter-spacing: -0.025em;
+  list-style: none;
+}
+.support-panel > summary::-webkit-details-marker {
+  display: none;
+}
+.support-panel > summary::after {
+  content: "+";
+  margin-left: auto;
+  color: var(--accent);
+  font-family: var(--sans);
+  font-size: 26px;
+  font-weight: 300;
+}
+.support-panel[open] > summary::after {
+  content: "–";
+}
+.support-panel > .section {
+  padding-top: 22px;
+  padding-bottom: 65px;
+}
+.support-panel .roadmap-section,
+.support-panel .support-section,
+.support-panel .impact-section {
+  background: transparent;
+}
+.support-panel .support-section {
+  border-top: 0;
+}
+.support-panel .support-heading {
+  margin-top: 0;
+}
 @media (min-width: 1100px) and (max-width: 1400px) {
   .desktop-nav {
     gap: 12px;
@@ -313,6 +418,9 @@
   }
   .ambassador-hero-grid {
     gap: 30px;
+  }
+  .company-overview {
+    gap: 34px;
   }
   .profile-switch {
     margin-left: auto;
@@ -358,6 +466,16 @@
   }
   .audience-choice ul {
     margin: 18px 0;
+  }
+  .company-overview {
+    grid-template-columns: 1fr;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .support-panel > summary {
+    min-height: 70px;
+    width: calc(100% - 48px);
+    padding: 15px 24px;
   }
   .ambassador-hero {
     padding-top: 40px;

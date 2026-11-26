@@ -35,7 +35,7 @@ export default function BrochurePage() {
             height={97}
           />
           <Image
-            src="/brand/ufr-mathematiques-informatique.jpg"
+            src="/brand/ufr-mathematiques-informatique.png"
             alt="UFR Mathématiques et Informatique — Université Paris Cité"
             width={2224}
             height={700}

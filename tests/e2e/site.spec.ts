@@ -259,6 +259,7 @@ test("les routes éditoriales et l’absence de WebGL ne bloquent pas le contenu
 
 test("le réseau 3D se met en pause, reprend et résiste à une perte de contexte", async ({
   page,
+  baseURL,
 }) => {
   const errors: string[] = [];
   const warnings: string[] = [];
@@ -269,7 +270,7 @@ test("le réseau 3D se met en pause, reprend et résiste à une perte de context
       warnings.push(message.text());
   });
   page.on("request", (request) => {
-    if (!request.url().startsWith("http://127.0.0.1:3000"))
+    if (new URL(request.url()).origin !== new URL(baseURL!).origin)
       externalRequests.push(request.url());
   });
   await page.emulateMedia({ reducedMotion: "no-preference" });

@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/hero";
-import { WhyUfr } from "@/components/about";
-import { UfrEcosystem } from "@/components/ufr-ecosystem";
+import { CompanyOverview } from "@/components/company-overview";
+import { CompanySupport } from "@/components/company-support";
 import { MatchExplorer } from "@/components/match/match-explorer";
-import { ImpactSection } from "@/components/impact/impact-section";
 import { Programs } from "@/components/programs";
 import { Realizations } from "@/components/realizations";
 import { ProjectTopics } from "@/components/project-topics";
-import { Roadmap } from "@/components/roadmap";
-import { SolteaGuide } from "@/components/soltea-guide";
 import { BusinessContact } from "@/components/business-contact";
 import { CampusEvents } from "@/components/campus-events";
-import { Reveal } from "@/components/reveal";
 
 export const metadata: Metadata = {
   title: "Entreprises · Talents, projets et SOLTéA",
@@ -24,18 +20,13 @@ export default function CompaniesPage() {
   return (
     <main id="main-content">
       <Hero />
-      <UfrEcosystem />
+      <CompanyOverview />
       <MatchExplorer />
-      <Reveal>
-        <WhyUfr />
-      </Reveal>
-      <ImpactSection />
       <Programs />
       <Realizations />
       <ProjectTopics />
       <CampusEvents />
-      <Roadmap />
-      <SolteaGuide />
+      <CompanySupport />
       <BusinessContact />
     </main>
   );
